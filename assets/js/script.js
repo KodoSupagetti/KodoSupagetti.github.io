@@ -1,14 +1,18 @@
 'use strict';
 
 // element toggle function
-const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
+const elementToggleFunc = function (elem) {
+  elem.classList.toggle("active");
+}
 
 // sidebar variables
 const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
 // sidebar toggle functionality for mobile
-sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
+sidebarBtn.addEventListener("click", function () {
+  elementToggleFunc(sidebar);
+});
 
 // testimonials variables
 const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
@@ -111,23 +115,23 @@ for (let i = 0; i < filterBtn.length; i++) {
 
 
 // contact form variables
-const form = document.querySelector("[data-form]");
-const formInputs = document.querySelectorAll("[data-form-input]");
-const formBtn = document.querySelector("[data-form-btn]");
+// const form = document.querySelector("[data-form]");
+// const formInputs = document.querySelectorAll("[data-form-input]");
+// const formBtn = document.querySelector("[data-form-btn]");
 
-// add event to all form input field
-for (let i = 0; i < formInputs.length; i++) {
-  formInputs[i].addEventListener("input", function () {
+// // add event to all form input field
+// for (let i = 0; i < formInputs.length; i++) {
+//   formInputs[i].addEventListener("input", function () {
 
-    // check form validation
-    if (form.checkValidity()) {
-      formBtn.removeAttribute("disabled");
-    } else {
-      formBtn.setAttribute("disabled", "");
-    }
+//     // check form validation
+//     if (form.checkValidity()) {
+//       formBtn.removeAttribute("disabled");
+//     } else {
+//       formBtn.setAttribute("disabled", "");
+//     }
 
-  });
-}
+//   });
+// }
 
 
 
@@ -152,3 +156,74 @@ for (let i = 0; i < navigationLinks.length; i++) {
 
   });
 }
+
+const startInput = document.querySelector('input[name="start"]');
+const videoText = document.getElementById("mediashare-text");
+
+function updateVideoText() {
+  const startSeconds = parseInt(startInput.value) || 0;
+  const endSeconds = startSeconds + 60;
+  videoText.textContent = `The video will play from second ${startSeconds} to ${endSeconds}`;
+}
+
+// Run once when page loads
+updateVideoText();
+
+// Add event listeners to detect changes in input values
+startInput.addEventListener("input", function () {
+  this.value = this.value.replace(/[^0-9]/g, '');
+  if (this.value === "" || this.value < 0) {
+    this.value = 0;
+  }
+  this.addEventListener("input", updateVideoText);
+})
+
+const form = document.querySelector("[data-form]");
+const inputs = document.querySelectorAll("[data-form-input]");
+const submitButton = document.querySelector("[data-form-btn]");
+
+form.addEventListener("submit", async function (event) {
+  event.preventDefault();
+
+  // Check if the user has sent in the last 5 minutes
+  const lastSentTime = localStorage.getItem("lastSentTime");
+  const now = Date.now();
+
+  if (lastSentTime && now - lastSentTime < 5 * 60 * 1000) {
+    alert("You can only send a message once every 5 minutes.");
+    return;
+  }
+
+  // Get value from form input
+  const formData = new FormData(form);
+  const data = {
+    name: formData.get('name'),
+    email: formData.get('email'),
+    message: formData.get('message'),
+    youtube: formData.get('youtube'),
+    start: formData.get('start')
+  };
+
+  try {
+    const response = await fetch("http://localhost:3000/api/message", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error("Gagal mengirim pesan. Silakan coba lagi.");
+    }
+
+    // Save last sent time
+    localStorage.setItem("lastSentTime", Date.now());
+
+    // Reset form after success
+    inputs.forEach((input) => (input.value = ""));
+    alert("Your message has been sent successfully!");
+  } catch (error) {
+    alert(error.message);
+  }
+});
