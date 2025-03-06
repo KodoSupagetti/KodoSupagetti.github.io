@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kodo Supagetti | Website</title>
+  <title>Kodo Supagetti | Profile</title>
 
   <!--
     - favicon
@@ -77,7 +77,7 @@
             <div class="contact-info">
               <p class="contact-title">YouTube</p>
 
-              <a href="https://www.youtube.com/@KodoSupagetti" class="contact-link">Kōdo Supagetti Ch.</a>
+              <a href="https://www.youtube.com/@KodoSupagetti" class="contact-link" target="_blank">Kōdo Supagetti Ch.</a>
             </div>
 
           </li>
@@ -91,7 +91,7 @@
             <div class="contact-info">
               <p class="contact-title">Twitter</p>
 
-              <a href="https://x.com/kodosupagetti" class="contact-link">Kodo Supagetti 🍝</a>
+              <a href="https://x.com/kodosupagetti" class="contact-link" target="_blank">Kodo Supagetti 🍝</a>
             </div>
 
           </li>
@@ -105,7 +105,7 @@
             <div class="contact-info">
               <p class="contact-title">TikTok</p>
 
-              <a href="https://www.tiktok.com/@kodo.supagetti" class="contact-link">Kodo Supagetti</a>
+              <a href="https://www.tiktok.com/@kodo.supagetti" class="contact-link" target="_blank">Kodo Supagetti</a>
             </div>
 
           </li>
@@ -135,7 +135,7 @@
           </li>
 
           <li class="social-item">
-            <a href="https://github.com/kodosupagetti" class="social-link" target="_blank">
+            <a href="#" class="social-link" target="_blank">
               <ion-icon name="logo-discord"></ion-icon>
             </a>
           </li>
@@ -148,7 +148,7 @@
 
 
           <li class="social-item">
-            <a href="https://github.com/kodosupagetti" class="social-link" target="_blank">
+            <a href="https://steamcommunity.com/id/KodoSupagetti" class="social-link" target="_blank">
               <ion-icon name="logo-steam"></ion-icon>
             </a>
           </li>
@@ -777,6 +777,12 @@
           <h2 class="h2 article-title">Portfolio</h2>
         </header>
 
+        <section class="about-text">
+          <p>
+            Explore my creative journey through a showcase of my projects, achievements, and collaborations in the digital realm!
+          </p>
+        </section>
+
         <h2 class="h2 coming-soon">Coming Soon!</h2>
 
         <!-- <section class="projects">
@@ -1016,6 +1022,12 @@
           <h2 class="h2 article-title">Merch</h2>
         </header>
 
+        <section class="about-text">
+          <p>
+            Browse and shop exclusive merchandise that reflects my brand and passion, designed just for you!
+          </p>
+        </section>
+
         <h2 class="h2 coming-soon">Coming Soon!</h2>
 
         <!-- <section class="blog-posts">
@@ -1210,12 +1222,10 @@
           <h2 class="h2 article-title">Contact</h2>
         </header>
 
-        <section class="mapbox" data-mapbox>
-          <figure>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d32654820.88251219!2d117.88879999999999!3d-2.4456499999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c4c07d7496404b7%3A0xe37b4de71badf485!2sIndonesia!5e0!3m2!1sid!2sid!4v1739157649724!5m2!1sid!2sid"
-              width="400" height="300" loading="lazy"></iframe>
-          </figure>
+        <section class="about-text">
+          <p>
+            Send messages and share media in real time while I am live streaming!
+          </p>
         </section>
 
         <section class="contact-form">
@@ -1225,14 +1235,37 @@
           <form action="#" class="form" data-form>
 
             <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
-
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+              <div class="wrapper">
+                <p class="label-input">Name <span>*</span></p>
+                 <input type="text" name="name" class="form-input" placeholder="Kimi no nawa" maxlength="50" required data-form-input>
+              </div>
+              
+              <div class="wrapper">
+                <p class="label-input">Email <span>*</span></p>
+                <input type="email" name="email" class="form-input" placeholder="Enter your email address" maxlength="50" required data-form-input>
+              </div>
             </div>
 
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+            <p class="label-input">Message <span>*</span></p>
+            <textarea name="message" class="form-input" placeholder="Enter your Message" maxlength="300" required data-form-input></textarea>
 
-            <button class="form-btn" type="submit" disabled data-form-btn>
+            <div class="hr"></div>
+            <p class="mediashare-text">Maximum video duration: 60 seconds</p>
+            <p class="mediashare-text" id="mediashare-text" style="margin-bottom: 20px;">The video will play from second 0 to 0</p>
+
+            <div class="input-wrapper" style="margin-bottom: 15px;">
+              <div class="wrapper">
+                <p class="label-input">Youtube URL</p>
+                 <input type="text" name="youtube" class="form-input" placeholder="Enter youtube URL (Optional)" data-form-input>
+              </div>
+              
+              <div class="wrapper">
+                <p class="label-input">Starting at seconds</p>
+                <input type="number" name="start" class="form-input" value="0" min="0" data-form-input>
+              </div>
+            </div>
+
+            <button class="form-btn" type="submit" data-form-btn>
               <ion-icon name="paper-plane"></ion-icon>
               <span>Send Message</span>
             </button>
