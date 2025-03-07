@@ -205,7 +205,7 @@ form.addEventListener("submit", async function (event) {
   };
 
   try {
-    const response = await fetch("http://localhost:3000/api/message", {
+    const response = await fetch("https://murmuring-savannah-14363-f13e51393712.herokuapp.com/api/message", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
