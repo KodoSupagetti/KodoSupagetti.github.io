@@ -214,7 +214,14 @@ form.addEventListener("submit", async function (event) {
     });
 
     if (!response.ok) {
-      throw new Error("Gagal mengirim pesan. Silakan coba lagi.");
+      if (response.status === 400) {
+        alert("Permintaan tidak valid. Pastikan data yang Anda masukkan benar.");
+      } else if (response.status === 429) {
+        alert("Terlalu banyak permintaan. Silakan coba lagi nanti.");
+      } else {
+        throw new Error("Gagal mengirim pesan. Silakan coba lagi.");
+      }
+      return;
     }
 
     // Save last sent time
